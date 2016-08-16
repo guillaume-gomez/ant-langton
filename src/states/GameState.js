@@ -1,11 +1,19 @@
-import RainbowText from 'objects/RainbowText';
+import Cell from 'objects/Cell';
 
 class GameState extends Phaser.State {
 
 	create() {
-		let center = { x: this.game.world.centerX, y: this.game.world.centerY }
-		let text = new RainbowText(this.game, center.x, center.y, "- phaser -\nwith a sprinkle of\nES6 dust!");
-		text.anchor.set(0.5);
+		this.cell = new Cell(this.game, 10, 10, 30, 30);
+		this.cell2 = new Cell(this.game, 50, 50, 23, 58);
+		this.game.add.existing(this.cell);
+		this.game.add.existing(this.cell2);
+	}
+
+	preload() {
+	}
+
+	update() {
+
 	}
 
 }
