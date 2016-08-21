@@ -1,12 +1,9 @@
-import Cell from 'objects/Cell';
+import Grid from 'objects/Grid';
 
 class GameState extends Phaser.State {
 
 	create() {
-		this.cell = new Cell(this.game, 10, 10, 30, 30);
-		this.cell2 = new Cell(this.game, 50, 50, 23, 58);
-		this.game.add.existing(this.cell);
-		this.game.add.existing(this.cell2);
+		this.gridLayout = new Grid(this.game, 9, 9, 50, 10, 10);
 	}
 
 	preload() {
