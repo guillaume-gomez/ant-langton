@@ -1,18 +1,12 @@
 import Cell from 'objects/Cell';
 
-class Grid{
+class Grid extends Phaser.Group {
 
-	constructor(game, nbRow, nbColumn, cellSize) {
-		this.cells = [];
-		if(nbRow == 0 || nbColumn == 0) {
-			console.error("Grid:width is null or equal to 0")
-		}
-		this.width  = width;
-		this.height = height;
-		
+	constructor(game, nbRow, nbColumn, cellSize, xOrigin = 0, yOrigin = 0) {
+		super(game)
 		for(let y = 0; y < nbColumn; ++y) {
 			for(let x = 0; x < nbRow; ++x) {
-				this.cells[x][y] = new Cell(x * cellSize, y * cellSize, cellSize, cellSize);
+				this.add( new Cell(game, x * cellSize + xOrigin, y * cellSize + yOrigin, cellSize, cellSize) );
 			}
 		}
 	}
