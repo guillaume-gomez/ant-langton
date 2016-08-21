@@ -15,6 +15,20 @@ class GameState extends Phaser.State {
 		this.ant = new Ant(this.game, 400, 100);
 		this.game.add.existing(this.ant);
 
+		this.setAntOnCell(3, 4);
+
+	}
+
+	setAntCenter() {
+		const indexX = Math.trunc( (Bounds / CellWidth) / 2 );
+		const indexY = Math.trunc( (Bounds / CellWidth) / 2 );
+		setAntOnCell(indexX, indexY);
+	}
+
+	setAntOnCell(indexX, indexY) {
+		const cell = this.gridLayout.getCell(indexX, indexY);
+		this.ant.x = cell.realPosition.x + CellWidth / 2 - this.ant.width / 2; 
+		this.ant.y = cell.realPosition.y + CellWidth / 2 - this.ant.height / 2;
 	}
 
 	preload() {
