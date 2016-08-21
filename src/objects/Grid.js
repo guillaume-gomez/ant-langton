@@ -1,4 +1,5 @@
 import Cell from 'objects/Cell';
+import { CellWidth } from "../constants"
 
 class Grid extends Phaser.Group {
 
@@ -20,6 +21,13 @@ class Grid extends Phaser.Group {
 		}
 		const index = rowIndex + columnIndex * this.nbColumn;
 		return this.getAt( index );
+	}
+
+	getCellAtPosition(x, y) {
+		const indexX = Math.trunc( x / CellWidth );
+		const indexY = Math.trunc( y / CellWidth );
+		return this.getCell( indexX, indexY );
+		
 	}
 
 }
