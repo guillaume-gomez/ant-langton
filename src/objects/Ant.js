@@ -1,3 +1,5 @@
+import { CellWidth } from '../constants';
+
 class Ant extends Phaser.Sprite{
 
 	constructor(game, x, y) {
@@ -9,11 +11,11 @@ class Ant extends Phaser.Sprite{
 	}
 
   turnLeft() {
-    //TODO
+    this.x = this.x - CellWidth;
   }
 
   turnRight() {
-    //TODO
+    this.x = this.x + CellWidth;
   }
 }
 
