@@ -5,7 +5,8 @@ class Cell extends Phaser.Graphics{
 		this.beginFill(color);
 		this.lineStyle(2, lineColor, 1);
     	this.drawRect(x, y, width, height);
-		this.checked = false;
+    this.checked = false;
+    this.realPosition = {x, y};
 	}
 }
 
