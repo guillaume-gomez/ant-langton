@@ -1,7 +1,8 @@
 import Grid from 'objects/Grid';
+import Ant from 'objects/Ant';
 
 const CameraVelocity = 10;
-const Bounds = 2000;
+const Bounds = 250;
 const CellWidth = 50;
 
 class GameState extends Phaser.State {
@@ -11,10 +12,14 @@ class GameState extends Phaser.State {
 		this.gridLayout = new Grid(this.game, Bounds/ CellWidth, Bounds/CellWidth, CellWidth);
 		this.cursors = this.game.input.keyboard.createCursorKeys();
 
+		this.ant = new Ant(this.game, 400, 100);
+		this.game.add.existing(this.ant);
+
 	}
 
 	preload() {
-	}
+    this.game.load.spritesheet('ant', 'res/ants.png', 32, 32);
+  }
 
 	update() {
 
@@ -35,8 +40,11 @@ class GameState extends Phaser.State {
     {
     	this.game.camera.x += CameraVelocity;
     }
+	}
 
-}
+	/* render() {
+		this.game.debug.spriteBounds(this.ant);
+	}*/
 
 
 }
