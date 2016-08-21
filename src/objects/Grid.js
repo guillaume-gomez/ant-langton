@@ -3,13 +3,25 @@ import Cell from 'objects/Cell';
 class Grid extends Phaser.Group {
 
 	constructor(game, nbRow, nbColumn, cellSize, xOrigin = 0, yOrigin = 0, cellColor = 0xFF3300, gridColor = 0x000000) {
-		super(game)
+		super(game);
+		this.nbRow = nbRow;
+		this.nbColumn = nbColumn;
 		for(let y = 0; y < nbColumn; ++y) {
 			for(let x = 0; x < nbRow; ++x) {
 				this.add( new Cell(game, x * cellSize + xOrigin, y * cellSize + yOrigin, cellSize, cellSize, cellColor, gridColor) );
 			}
 		}
 	}
+
+	getCell(rowIndex, columnIndex) {
+		if(rowIndex > this.nbRow || columnIndex > this.nbColumn) {
+			console.error("Grid::getCell out of border");
+			return null;
+		}
+		const index = rowIndex + columnIndex * this.nbColumn;
+		return this.getAt( index );
+	}
+
 }
 
 export default Grid;
