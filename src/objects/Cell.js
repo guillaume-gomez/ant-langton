@@ -1,3 +1,6 @@
+const BlackColor = 0x000000;
+const WhiteColor = 0xFFFFFFF;
+
 class Cell extends Phaser.Graphics{
 
 	constructor(game, x, y, width, height, color= 0xFFFFFFF, lineColor = 0x000000) {
@@ -8,6 +11,13 @@ class Cell extends Phaser.Graphics{
     this.checked = false;
     this.realPosition = {x, y};
 	}
+
+  toggle() {
+    this.checked = !this.checked;
+    const newColor = this.checked ? BlackColor: WhiteColor;
+    this.beginFill();
+
+  }
 }
 
 export default Cell;
