@@ -15,14 +15,18 @@ class GameState extends Phaser.State {
 		this.ant = new Ant(this.game, 400, 100);
 		this.game.add.existing(this.ant);
 
-		this.setAntOnCell(3, 4);
+		this.setAntCenter();
+
+		this.timer = this.game.time.create(false);
+		this.timer.add(2000, this.updatePosition, this);
+		this.timer.start();
 
 	}
 
 	setAntCenter() {
 		const indexX = Math.trunc( (Bounds / CellWidth) / 2 );
 		const indexY = Math.trunc( (Bounds / CellWidth) / 2 );
-		setAntOnCell(indexX, indexY);
+		this.setAntOnCell(indexX, indexY);
 	}
 
 	setAntOnCell(indexX, indexY) {
@@ -33,6 +37,20 @@ class GameState extends Phaser.State {
 
 	preload() {
     this.game.load.spritesheet('ant', 'res/ants.png', 32, 32);
+  }
+
+  updatePosition() {
+  	let cell = this.gridLayout.getCellAtPosition( this.ant.x, this.ant.y );
+  	if(cell.isChecked()) {
+  		this.ant.turnRight();
+  		//console.log("right")
+  	}
+  	else {
+  		this.ant.turnLeft();
+  		//console.log("left")
+  	}
+  	cell.toggle();
+  	this.timer.add(2000, this.updatePosition, this);
   }
 
 	update() {
