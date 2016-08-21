@@ -7,16 +7,23 @@ class Cell extends Phaser.Graphics{
 		super(game, 0, 0);
 		this.beginFill(color);
 		this.lineStyle(2, lineColor, 1);
-    	this.drawRect(x, y, width, height);
+    this.drawRect(x, y, width, height);
     this.checked = false;
     this.realPosition = {x, y};
-	}
+	  this.lineColor = lineColor;
+    this.color = color;
+  }
 
   toggle() {
     this.checked = !this.checked;
     const newColor = this.checked ? BlackColor: WhiteColor;
-    this.beginFill();
+    this.beginFill(newColor);
+    this.lineStyle(2, this.lineColor, 1);
+    this.drawRect(this.realPosition.x, this.realPosition.y, this.width, this.height);
+  }
 
+  isChecked() {
+    return this.checked;
   }
 }
 
