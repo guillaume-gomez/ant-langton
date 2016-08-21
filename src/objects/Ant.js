@@ -7,6 +7,14 @@ class Ant extends Phaser.Sprite{
     this.animations.add('right', [24, 25, 25], 10, true);
     this.animations.add('up', [32, 33, 34], 10, true);
 	}
+
+  turnLeft() {
+    //TODO
+  }
+
+  turnRight() {
+    //TODO
+  }
 }
 
 export default Ant;
