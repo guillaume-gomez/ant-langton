@@ -41,14 +41,7 @@ class GameState extends Phaser.State {
 
   updatePosition() {
   	let cell = this.gridLayout.getCellAtPosition( this.ant.x, this.ant.y );
-  	if(cell.isChecked()) {
-  		this.ant.turnRight();
-  		//console.log("right")
-  	}
-  	else {
-  		this.ant.turnLeft();
-  		//console.log("left")
-  	}
+  	this.ant.updateAnt(cell);
   	cell.toggle();
   	this.timer.add(2000, this.updatePosition, this);
   }
