@@ -3,7 +3,8 @@ import Ant from 'objects/Ant';
 import { CellWidth } from '../constants';
 
 const CameraVelocity = 10;
-const Bounds = 250;
+const Bounds = CellWidth * 15;
+const ElapsedTime = 1000;
 
 class GameState extends Phaser.State {
 
@@ -12,13 +13,13 @@ class GameState extends Phaser.State {
 		this.gridLayout = new Grid(this.game, Bounds/ CellWidth, Bounds/CellWidth, CellWidth);
 		this.cursors = this.game.input.keyboard.createCursorKeys();
 
-		this.ant = new Ant(this.game, 400, 100);
+		this.ant = new Ant(this.game, 0, 0);
 		this.game.add.existing(this.ant);
 
 		this.setAntCenter();
 
 		this.timer = this.game.time.create(false);
-		this.timer.add(2000, this.updatePosition, this);
+		this.timer.add(ElapsedTime, this.updatePosition, this);
 		this.timer.start();
 
 	}
@@ -43,7 +44,7 @@ class GameState extends Phaser.State {
   	let cell = this.gridLayout.getCellAtPosition( this.ant.x, this.ant.y );
   	this.ant.updateAnt(cell);
   	cell.toggle();
-  	this.timer.add(2000, this.updatePosition, this);
+  	this.timer.add(ElapsedTime, this.updatePosition, this);
   }
 
 	update() {
