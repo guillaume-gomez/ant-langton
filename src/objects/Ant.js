@@ -1,54 +1,42 @@
 import { CellWidth } from '../constants';
+import { mod } from "../utils";
 
 const Tilt = 90;
 class Ant extends Phaser.Sprite{
 
 	constructor(game, x, y) {
 		super(game, x, y, "ant", 0);
-		this.antRotation = 0;
+		this.antRotation = 90;
     this.animations.add('down', [0, 1, 2], 10, true);
     this.animations.add('left', [12, 13, 14], 10, true);
     this.animations.add('right', [24, 25, 25], 10, true);
     this.animations.add('up', [32, 33, 34], 10, true);
 	}
 
-  rotate() {
-    this.antRotation = (this.antRotation + Tilt) % 360;
+  rotate(direction) {
+    const newRotation = direction > 0 ? (this.antRotation + Tilt) : (this.antRotation - Tilt);
+    this.antRotation = mod(newRotation, 360);
   }
 
   updateAnt(cell) {
-    this.rotate();
     if(cell.isChecked()) {
-      switch(this.antRotation) {
-        case 0:
-          this.goLeft();
-        break;
-        case 90:
-          this.goUp();
-        break;
-        case 180:
-          this.goUp();
-        break;
-        case 270:
-          this.goDown();
-        break;
-      }
+      this.rotate(1);
+    } else {
+      this.rotate(-1);
     }
-    else {
-      switch(this.antRotation) {
-        case 0:
-          this.goDown();
-        break;
-        case 90:
-          this.turnLeft();
-        break;
-        case 180:
-          this.turnRight();
-        break;
-        case 270:
-          this.goUp();
-        break;
-      }
+    switch(this.antRotation) {
+      case 0:
+        this.turnRight();
+      break;
+      case 90:
+        this.goUp();
+      break;
+      case 180:
+        this.turnLeft();
+      break;
+      case 270:
+        this.goDown();
+      break;
     }
   }
 
