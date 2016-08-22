@@ -3,7 +3,7 @@ import { CellWidth } from "../constants"
 
 class Grid extends Phaser.Group {
 
-	constructor(game, nbRow, nbColumn, cellSize, xOrigin = 0, yOrigin = 0, cellColor = 0xFF3300, gridColor = 0x000000) {
+	constructor(game, nbRow, nbColumn, cellSize, xOrigin = 0, yOrigin = 0, cellColor = 0xFFFFFFF, gridColor = 0x000000) {
 		super(game);
 		this.nbRow = nbRow;
 		this.nbColumn = nbColumn;
