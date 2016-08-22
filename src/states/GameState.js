@@ -18,6 +18,7 @@ class GameState extends Phaser.State {
 
 		this.setAntCenter();
 
+		this.steps = 0;
 		this.timer = this.game.time.create(false);
 		this.timer.add(ElapsedTime, this.updatePosition, this);
 		this.timer.start();
@@ -44,6 +45,7 @@ class GameState extends Phaser.State {
   	let cell = this.gridLayout.getCellAtPosition( this.ant.x, this.ant.y );
   	this.ant.updateAnt(cell);
   	cell.toggle();
+  	this.steps += 1;
   	this.timer.add(ElapsedTime, this.updatePosition, this);
   }
 
