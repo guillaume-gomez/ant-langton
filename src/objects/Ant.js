@@ -1,16 +1,26 @@
-import { CellWidth, ElapsedTime } from '../constants';
+import { CellWidth, ElapsedTime, AntsColor, convertToNumberColor } from '../constants';
 import { mod } from "../utils";
 
 const Tilt = 90;
 class Ant extends Phaser.Sprite{
 
-	constructor(game, x, y) {
+	constructor(game, x, y, antColor = AntsColor[0]) {
 		super(game, x, y, "ant", 0);
 		this.antRotation = 90;
-    this.animations.add('down', [0, 1, 2], 10, true);
-    this.animations.add('left', [12, 13, 14], 10, true);
-    this.animations.add('right', [24, 25, 26], 10, true);
-    this.animations.add('up', [36, 37, 38], 10, true);
+
+    const convertToColorFn = (number) => {
+      return convertToNumberColor(antColor) * 3 + number;
+    };
+
+    const downArray = [0, 1, 2].map(convertToColorFn);
+    const leftArray = [12, 13, 14].map(convertToColorFn);
+    const rightArray = [24, 25, 26].map(convertToColorFn);
+    const upArray = [36, 37, 38].map(convertToColorFn);
+
+    this.animations.add('down', downArray, 10, true);
+    this.animations.add('left', leftArray, 10, true);
+    this.animations.add('right', rightArray, 10, true);
+    this.animations.add('up', upArray , 10, true);
 
     this.game = game;
 	}

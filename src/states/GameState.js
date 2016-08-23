@@ -12,7 +12,7 @@ class GameState extends Phaser.State {
 		this.gridLayout = new Grid(this.game, Bounds/ CellWidth, Bounds/CellWidth, CellWidth);
 		this.cursors = this.game.input.keyboard.createCursorKeys();
 
-		this.ant = new Ant(this.game, 0, 0);
+		this.ant = new Ant(this.game, 0, 0, "red");
 		this.game.add.existing(this.ant);
 
 		this.setAntCenter();
