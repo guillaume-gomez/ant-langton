@@ -1,4 +1,4 @@
-import { CellWidth } from '../constants';
+import { CellWidth, ElapsedTime } from '../constants';
 import { mod } from "../utils";
 
 const Tilt = 90;
@@ -11,6 +11,8 @@ class Ant extends Phaser.Sprite{
     this.animations.add('left', [12, 13, 14], 10, true);
     this.animations.add('right', [24, 25, 25], 10, true);
     this.animations.add('up', [32, 33, 34], 10, true);
+
+    this.game = game;
 	}
 
   rotate(direction) {
@@ -41,19 +43,23 @@ class Ant extends Phaser.Sprite{
   }
 
   goDown() {
-    this.y = this.y + CellWidth;
+    const position = this.y + CellWidth;
+    this.game.add.tween(this).to( { y: position }, ElapsedTime, Phaser.Easing.Linear.None, true);
   }
 
   goUp() {
-    this.y = this.y - CellWidth;
+    const position = this.y - CellWidth;
+    this.game.add.tween(this).to( { y: position }, ElapsedTime, Phaser.Easing.Linear.None, true);
   }
 
   turnLeft() {
-    this.x = this.x - CellWidth;
+    const position = this.x - CellWidth;
+    this.game.add.tween(this).to( { x: position }, ElapsedTime, Phaser.Easing.Linear.None, true);
   }
 
   turnRight() {
-    this.x = this.x + CellWidth;
+    const position = this.x + CellWidth;
+    this.game.add.tween(this).to( { x: position }, ElapsedTime, Phaser.Easing.Linear.None, true);
   }
 }
 
