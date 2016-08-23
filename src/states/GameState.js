@@ -1,10 +1,9 @@
 import Grid from 'objects/Grid';
 import Ant from 'objects/Ant';
-import { CellWidth } from '../constants';
+import { CellWidth, ElapsedTime } from '../constants';
 
 const CameraVelocity = 10;
 const Bounds = CellWidth * 15;
-const ElapsedTime = 1000;
 
 class GameState extends Phaser.State {
 
