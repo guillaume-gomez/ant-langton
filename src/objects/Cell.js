@@ -1,4 +1,4 @@
-const BlackColor = 0x000000;
+const GreyColor = 0xCAC8C8;
 const WhiteColor = 0xFFFFFFF;
 
 class Cell extends Phaser.Graphics{
@@ -16,7 +16,7 @@ class Cell extends Phaser.Graphics{
 
   toggle() {
     this.checked = !this.checked;
-    const newColor = this.checked ? BlackColor: WhiteColor;
+    const newColor = this.checked ? GreyColor: WhiteColor;
     this.beginFill(newColor);
     this.lineStyle(2, this.lineColor, 1);
     this.drawRect(this.realPosition.x, this.realPosition.y, this.width, this.height);
