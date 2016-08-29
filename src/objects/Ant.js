@@ -4,13 +4,13 @@ import { mod } from "../utils";
 const Tilt = 90;
 class Ant extends Phaser.Sprite{
 
-	constructor(game, x, y, antColor = AntsColor[0]) {
-		super(game, x, y, "ant", 0);
-		this.antRotation = 90;
-
+  constructor(game, x, y, antColor = AntsColor[0]) {
     const convertToColorFn = (number) => {
       return convertToNumberColor(antColor) * 3 + number;
     };
+
+    super(game, x, y, "ant", convertToColorFn(0));
+    this.antRotation = 90;
 
     const downArray = [0, 1, 2].map(convertToColorFn);
     const leftArray = [12, 13, 14].map(convertToColorFn);

@@ -34,11 +34,12 @@ class GameState extends Phaser.State {
 
 	setAntOnCell(indexX, indexY) {
 		const cell = this.gridLayout.getCell(indexX, indexY);
-		this.ant.x = cell.realPosition.x + CellWidth / 2 - this.ant.width / 2; 
+		this.ant.x = cell.realPosition.x + CellWidth / 2 - this.ant.width / 2;
 		this.ant.y = cell.realPosition.y + CellWidth / 2 - this.ant.height / 2;
 	}
 
 	preload() {
+    this.game.stage.disableVisibilityChange = true;
     this.game.load.spritesheet('ant', 'res/ants.png', 32, 32);
   }
 
