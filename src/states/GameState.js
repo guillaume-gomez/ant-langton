@@ -16,7 +16,7 @@ class GameState extends Phaser.State {
 		this.game.add.existing(this.ant);
 
 		this.textStep = this.game.add.text(this.game.world.width * 0.01, this.game.world.height * 0.01, "Steps: ", { font: "18px Arial", fill: "#0000FF", align: "center" });
-
+		this.textStep.fixedToCamera = true;
 		this.setAntCenter();
 
 		this.steps = 0;
