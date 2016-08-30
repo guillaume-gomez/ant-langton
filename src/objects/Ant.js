@@ -54,7 +54,7 @@ class Ant extends Phaser.Sprite{
 
   goDown() {
     const position = this.y + CellWidth;
-    this.game.add.tween(this).to( { y: position }, ElapsedTime, Phaser.Easing.Linear.None, true);
+    this.game.add.tween(this).to( { y: position }, window.ElapsedTime || ElapsedTime, Phaser.Easing.Linear.None, true);
     this.animations.play("down", 45, true);
     this.animations.stop("up");
     this.animations.stop("left");
@@ -63,7 +63,7 @@ class Ant extends Phaser.Sprite{
 
   goUp() {
     const position = this.y - CellWidth;
-    this.game.add.tween(this).to( { y: position }, ElapsedTime, Phaser.Easing.Linear.None, true);
+    this.game.add.tween(this).to( { y: position }, window.ElapsedTime || ElapsedTime, Phaser.Easing.Linear.None, true);
     this.animations.play("up", 45, true);
     this.animations.stop("down");
     this.animations.stop("left");
@@ -72,7 +72,7 @@ class Ant extends Phaser.Sprite{
 
   turnLeft() {
     const position = this.x - CellWidth;
-    this.game.add.tween(this).to( { x: position }, ElapsedTime, Phaser.Easing.Linear.None, true);
+    this.game.add.tween(this).to( { x: position }, window.ElapsedTime || ElapsedTime, Phaser.Easing.Linear.None, true);
     this.animations.play("left", 45, true);
     this.animations.stop("down");
     this.animations.stop("up");
@@ -81,7 +81,7 @@ class Ant extends Phaser.Sprite{
 
   turnRight() {
     const position = this.x + CellWidth;
-    this.game.add.tween(this).to( { x: position }, ElapsedTime, Phaser.Easing.Linear.None, true);
+    this.game.add.tween(this).to( { x: position }, window.ElapsedTime || ElapsedTime, Phaser.Easing.Linear.None, true);
     this.animations.play("right", 45, true);
     this.animations.stop("down");
     this.animations.stop("left");

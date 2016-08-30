@@ -21,7 +21,7 @@ class GameState extends Phaser.State {
 
 		this.steps = 0;
 		this.timer = this.game.time.create(false);
-		this.timer.add(ElapsedTime, this.updatePosition, this);
+		this.timer.add(window.ElapsedTime || ElapsedTime, this.updatePosition, this);
 		this.timer.start();
 
 	}
@@ -48,8 +48,8 @@ class GameState extends Phaser.State {
   	this.ant.updateAnt(cell);
   	cell.toggle();
   	this.steps += 1;
-  	this.textStep.text = "Steps :" + this.steps; 
-  	this.timer.add(ElapsedTime, this.updatePosition, this);
+  	this.textStep.text = "Steps :" + this.steps;
+  	this.timer.add(window.ElapsedTime || ElapsedTime, this.updatePosition, this);
   }
 
 	update() {
