@@ -1,5 +1,7 @@
 import Grid from 'objects/Grid';
 import Ant from 'objects/Ant';
+import History from 'objects/History';
+
 import { CellWidth, ElapsedTime } from '../constants';
 
 const CameraVelocity = 10;
@@ -24,6 +26,8 @@ class GameState extends Phaser.State {
 		this.timer.add(window.ElapsedTime || ElapsedTime, this.updatePosition, this);
 		this.timer.start();
 
+		this.replay = new History();
+		//this.replay.start();
 	}
 
 	setAntCenter() {
@@ -39,38 +43,39 @@ class GameState extends Phaser.State {
 	}
 
 	preload() {
-    this.game.stage.disableVisibilityChange = true;
-    this.game.load.spritesheet('ant', 'res/ants.png', 32, 32);
-  }
+    	this.game.stage.disableVisibilityChange = true;
+    	this.game.load.spritesheet('ant', 'res/ants.png', 32, 32);
+  	}
 
-  updatePosition() {
-  	let cell = this.gridLayout.getCellAtPosition( this.ant.x, this.ant.y );
-  	this.ant.updateAnt(cell);
-  	cell.toggle();
-  	this.steps += 1;
-  	this.textStep.text = "Steps :" + this.steps;
-  	this.timer.add(window.ElapsedTime || ElapsedTime, this.updatePosition, this);
-  }
+	updatePosition() {
+		let cell = this.gridLayout.getCellAtPosition( this.ant.x, this.ant.y );
+		this.ant.updateAnt(cell);
+		cell.toggle();
+		this.steps += 1;
+		this.textStep.text = "Steps :" + this.steps;
+		this.timer.add(window.ElapsedTime || ElapsedTime, this.updatePosition, this);
+		//this.replay.recordStep(this.steps, this.ant, this.gridLayout.getCellsArray());
+	}
 
 	update() {
 
-    if (this.cursors.up.isDown)
-    {
-      this.game.camera.y -= CameraVelocity;
-    }
-    else if (this.cursors.down.isDown)
-    {
-      this.game.camera.y += CameraVelocity;
-    }
+	    if (this.cursors.up.isDown)
+	    {
+	      this.game.camera.y -= CameraVelocity;
+	    }
+	    else if (this.cursors.down.isDown)
+	    {
+	      this.game.camera.y += CameraVelocity;
+	    }
 
-    if (this.cursors.left.isDown)
-    {
-    	this.game.camera.x -= CameraVelocity;
-    }
-    else if (this.cursors.right.isDown)
-    {
-    	this.game.camera.x += CameraVelocity;
-    }
+	    if (this.cursors.left.isDown)
+	    {
+	    	this.game.camera.x -= CameraVelocity;
+	    }
+	    else if (this.cursors.right.isDown)
+	    {
+	    	this.game.camera.x += CameraVelocity;
+	    }
 	}
 
 	/* render() {
