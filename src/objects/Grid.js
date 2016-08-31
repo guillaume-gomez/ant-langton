@@ -30,6 +30,12 @@ class Grid extends Phaser.Group {
 		
 	}
 
+	getCellsArray() {
+		return this.children.map(cell => {
+			return cell.checked;
+		});
+	}
+
 }
 
 export default Grid;
