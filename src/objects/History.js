@@ -1,8 +1,8 @@
+//only work for one ant
 class History {
 
-  constructor(game, ant) {
-    this.game = game;
-	  this.record = [];
+  constructor() {
+    this.record = [];
     this.isRecording = false;
   }
 
@@ -19,9 +19,11 @@ class History {
     this.isRecording = false;
   }
 
-  record(step, ant, gridArray) {
-    const { x, y } = ant.postion;
-    this.record[step] = { x, y, grid: gridArray };
+  recordStep(step, ant, gridArray) {
+    const { x, y } = ant;
+    if(this.isRecording) {
+      this.record[step] = { x, y, grid: gridArray };
+    }
   }
 
   getTo(step) {
