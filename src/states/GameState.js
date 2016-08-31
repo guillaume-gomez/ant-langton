@@ -27,7 +27,7 @@ class GameState extends Phaser.State {
 		this.timer.start();
 
 		this.replay = new History();
-		//this.replay.start();
+		this.replay.start();
 	}
 
 	setAntCenter() {
@@ -48,14 +48,22 @@ class GameState extends Phaser.State {
   	}
 
 	updatePosition() {
-		let cell = this.gridLayout.getCellAtPosition( this.ant.x, this.ant.y );
+    let cell = this.gridLayout.getCellAtPosition( this.ant.x, this.ant.y );
 		this.ant.updateAnt(cell);
 		cell.toggle();
 		this.steps += 1;
 		this.textStep.text = "Steps :" + this.steps;
 		this.timer.add(window.ElapsedTime || ElapsedTime, this.updatePosition, this);
-		//this.replay.recordStep(this.steps, this.ant, this.gridLayout.getCellsArray());
+		this.replay.recordStep(this.steps, this.ant, this.gridLayout.getCellsArray());
 	}
+
+  setSimulationTo() {
+    const simulationData = this.replay.getTo(2);
+    console.log(simulationData)
+    this.ant.x = simulationData.x;
+    this.ant.y = simulationData.y;
+    //this.gridLayout.setStates(simulationData.grid);
+  }
 
 	update() {
 
