@@ -30,6 +30,16 @@ class Ant extends Phaser.Sprite{
     this.antRotation = mod(newRotation, 360);
   }
 
+  goTo(xPos, yPos) {
+    this.animations.stop("down");
+    this.animations.stop("up");
+    this.animations.stop("left");
+    this.animations.stop("right");
+    this.x = xPos;
+    this.y = yPos;
+    
+  }
+
   updateAnt(cell) {
     if(cell.isChecked()) {
       this.rotate(1);
