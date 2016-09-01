@@ -30,6 +30,13 @@ class Grid extends Phaser.Group {
 		
 	}
 
+  setStates(arrayState) {
+    arrayState.forEach((value, index) => {
+      this.children[index].checked = value;
+      this.children[index].draw(); 
+    });
+  }
+
 	getCellsArray() {
 		return this.children.map(cell => {
 			return cell.checked;
