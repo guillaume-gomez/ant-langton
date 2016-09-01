@@ -28,12 +28,13 @@ class GameState extends Phaser.State {
 
 		this.replay = new History();
 		this.replay.start();
+    this.replay.recordStep(this.steps, this.ant, this.gridLayout.getCellsArray());
 	}
 
 	setAntCenter() {
 		const indexX = Math.trunc( (Bounds / CellWidth) / 2 );
 		const indexY = Math.trunc( (Bounds / CellWidth) / 2 );
-		this.setAntOnCell(indexX, indexY);
+    this.setAntOnCell(indexX, indexY);
 	}
 
 	setAntOnCell(indexX, indexY) {
@@ -43,8 +44,8 @@ class GameState extends Phaser.State {
 	}
 
 	preload() {
-    	this.game.stage.disableVisibilityChange = true;
-    	this.game.load.spritesheet('ant', 'res/ants.png', 32, 32);
+    this.game.stage.disableVisibilityChange = true;
+    this.game.load.spritesheet('ant', 'res/ants.png', 32, 32);
   	}
 
 	updatePosition() {
@@ -57,12 +58,11 @@ class GameState extends Phaser.State {
 		this.replay.recordStep(this.steps, this.ant, this.gridLayout.getCellsArray());
 	}
 
-  setSimulationTo() {
-    const simulationData = this.replay.getTo(2);
-    console.log(simulationData)
-    this.ant.x = simulationData.x;
-    this.ant.y = simulationData.y;
-    //this.gridLayout.setStates(simulationData.grid);
+  setSimulationTo(step) {
+    const simulationData = this.replay.getTo(step);
+    this.gridLayout.setStates(simulationData.grid);
+    this.ant.goTo(simulationData.x, simulationData.y);
+    this.steps = step;
   }
 
 	update() {
