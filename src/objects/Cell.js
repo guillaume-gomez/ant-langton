@@ -16,6 +16,10 @@ class Cell extends Phaser.Graphics{
 
   toggle() {
     this.checked = !this.checked;
+    this.draw();
+  }
+
+  draw() {
     const newColor = this.checked ? GreyColor: WhiteColor;
     this.beginFill(newColor);
     this.lineStyle(2, this.lineColor, 1);
