@@ -2,7 +2,7 @@ import Grid from 'objects/Grid';
 import Ant from 'objects/Ant';
 import History from 'objects/History';
 
-import { CellWidth, ElapsedTime, SizeTerrain } from '../constants';
+import { CellWidth, ElapsedTime, SizeTerrain, WidthCanvas, HeighCanvas } from '../constants';
 
 const CameraVelocity = 10;
 const Bounds = CellWidth * SizeTerrain;
@@ -29,7 +29,14 @@ class GameState extends Phaser.State {
 		this.replay = new History();
 		this.replay.start();
     this.replay.recordStep(this.steps, this.ant, this.gridLayout.getCellsArray());
+
+    this.initCamera();
 	}
+
+  initCamera() {
+    this.game.camera.x = this.game.world.width / 2 - WidthCanvas / 2;
+    this.game.camera.y = this.game.world.height / 2 - HeighCanvas / 2;
+  }
 
 	setAntCenter() {
 		const indexX = Math.trunc( (Bounds / CellWidth) / 2 );
@@ -46,7 +53,7 @@ class GameState extends Phaser.State {
 	preload() {
     this.game.stage.disableVisibilityChange = true;
     this.game.load.spritesheet('ant', 'res/ants.png', 32, 32);
-  	}
+  }
 
 	updatePosition() {
     let cell = this.gridLayout.getCellAtPosition( this.ant.x, this.ant.y );
