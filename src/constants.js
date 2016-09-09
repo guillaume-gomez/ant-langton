@@ -1,5 +1,6 @@
 export const CellWidth = 50;
 export const ElapsedTime = 500;
+export const SizeTerrain = 50;
 export const AntsColor = [
 	"brown",
 	"red",
