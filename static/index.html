@@ -5,21 +5,27 @@
 	<title>Langton ant's with Phaser in ES6</title>
 	<link rel="stylesheet" href="styles/main.css">
 	<link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
-	<div id="content"></div>
-	<script src="scripts/phaser.min.js"></script>
-	<script src="scripts/game.js"></script>
-	<div>
-		<label for="speed"> Speed m/s </label>
-		<input id="speed" type="range" min="10" max="2000" value="500" step="5" oninput="showValue(this.value, 'rangeSpeed')" onchange="showValue(this.value, 'rangeSpeed')" />
-		<span id="rangeSpeed">500</span>
-	</div>
-	<div>
-		<label for="grid"> Size grid </label>
-		<input id="grid" type="range" min="3" max="25" value="10" step="1" oninput="showValue(this.value, 'gridSize')" onchange="showValue(this.value, 'gridSize')" />
-		<span id="gridSize">10</span>
-	</div>
+  <div class="container">
+    <div class="row">
+      <div id="content"></div>
+    </div>
+    <div class="row">
+  		<label for="speed"> Speed m/s </label>
+  		<input id="speed" type="range" min="10" max="2000" value="500" step="5" oninput="showValue(this.value, 'rangeSpeed')" onchange="showValue(this.value, 'rangeSpeed')" />
+  		<span id="rangeSpeed">500</span>
+
+      <div>
+        <label for="grid"> Size grid </label>
+        <input id="grid" type="range" min="3" max="25" value="10" step="1" oninput="showValue(this.value, 'gridSize')" onchange="showValue(this.value, 'gridSize')" />
+        <span id="gridSize">10</span>
+      </div>
+    </div>
+  </div>
+  <script src="scripts/phaser.min.js"></script>
+  <script src="scripts/game.js"></script>
 	<script type="text/javascript">
 		function showValue(newValue, id)
 		{
