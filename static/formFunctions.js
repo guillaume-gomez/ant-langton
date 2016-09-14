@@ -5,3 +5,8 @@ function showValue(newValue, id)
 		window.ElapsedTime = newValue;
 	}
 }
+
+
+function startGame() {
+	//TO start Game
+}
