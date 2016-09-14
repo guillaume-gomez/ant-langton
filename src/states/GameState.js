@@ -26,9 +26,11 @@ class GameState extends Phaser.State {
 		this.timer.add(window.ElapsedTime || ElapsedTime, this.updatePosition, this);
 		this.timer.start();
 
-		this.replay = new History();
+        this.game.time.advancedTiming = true;
+
+	    this.replay = new History();
 		this.replay.start();
-    this.replay.recordStep(this.steps, this.ant, this.gridLayout.getCellsArray());
+    	this.replay.recordStep(this.steps, this.ant, this.gridLayout.getCellsArray());
 
     this.initCamera();
 	}
@@ -93,9 +95,10 @@ class GameState extends Phaser.State {
 	    }
 	}
 
-	/* render() {
-		this.game.debug.spriteBounds(this.ant);
-	}*/
+	render() {
+		//this.game.debug.spriteBounds(this.ant);
+        this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");
+	}
 
 
 }
