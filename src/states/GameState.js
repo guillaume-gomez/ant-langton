@@ -10,7 +10,6 @@ class GameState extends Phaser.State {
 
   create() {
     const sizeT = window.gridSize || SizeTerrain;
-    debugger
     const Bounds = CellWidth * sizeT;
     this.game.world.setBounds(0, 0, Bounds, Bounds);
     this.gridLayout = new Grid(this.game, Bounds/ CellWidth, Bounds/CellWidth, CellWidth);
@@ -65,8 +64,10 @@ class GameState extends Phaser.State {
     cell.toggle();
     this.steps += 1;
     this.textStep.text = "Steps :" + this.steps;
-    this.timer.add(window.ElapsedTime || ElapsedTime, this.updatePosition, this);
     this.replay.recordStep(this.steps, this.ant, this.gridLayout.getCellsArray());
+    if(window.play === true) {
+      this.timer.add(window.ElapsedTime || ElapsedTime, this.updatePosition, this);
+    }
   }
 
   setSimulationTo(step) {
