@@ -1,3 +1,4 @@
+
 function showValue(newValue, id)
 {
 	document.getElementById(id).innerHTML=newValue;
@@ -8,5 +9,5 @@ function showValue(newValue, id)
 
 
 function startGame() {
-	//TO start Game
+  new window.game();
 }

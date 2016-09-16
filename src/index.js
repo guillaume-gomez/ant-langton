@@ -11,4 +11,6 @@ class Game extends Phaser.Game {
 
 }
 
-new Game();
+window.game = Game;
+
+//new Game();
