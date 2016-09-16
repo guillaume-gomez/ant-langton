@@ -1,3 +1,6 @@
+function init() {
+  document.getElementById('play-pause').style.visibility = 'hidden';
+}
 
 function showValue(newValue, id)
 {
@@ -13,5 +16,7 @@ function showValue(newValue, id)
 function startGame() {
   if(!window.gameInstance) {
     window.gameInstance = new window.game();
+    document.getElementById('play-pause').style.visibility = 'visible';
+    document.getElementById('submit').style.visibility = 'hidden';
   }
 }
