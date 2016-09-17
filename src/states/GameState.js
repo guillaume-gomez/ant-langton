@@ -19,8 +19,10 @@ class GameState extends Phaser.State {
     this.ant = new Ant(this.game, 0, 0, "red");
     this.game.add.existing(this.ant);
 
-    this.textStep = this.game.add.text(this.game.world.width * 0.01, this.game.world.height * 0.01, "Steps: ", { font: "18px Arial", fill: "#0000FF", align: "center" });
+    this.textStep = this.game.add.text(this.game.world.width * 0.01, this.game.world.height * 0.01, "Steps: ", { font: "20px Arial", fill: "#FFFFFF", align: "center" });
     this.textStep.fixedToCamera = true;
+    this.textStep.stroke = '#000000';
+    this.textStep.strokeThickness = 6;
     this.setAntCenter(Bounds);
 
     this.steps = 0;
@@ -68,7 +70,7 @@ class GameState extends Phaser.State {
     this.ant.updateAnt(cell);
     cell.toggle();
     this.steps += 1;
-    this.textStep.text = "Steps :" + this.steps;
+    this.textStep.text = "Steps: " + this.steps;
     this.replay.recordStep(this.steps, this.ant, this.gridLayout.getCellsArray());
     if(window.play === true) {
       this.timer.add(window.ElapsedTime || ElapsedTime, this.updatePosition, this);
