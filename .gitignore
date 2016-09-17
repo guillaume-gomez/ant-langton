@@ -1,3 +1,7 @@
-build/*
-node_modules/*
 .env
+node_modules/*
+src/*
+static/*
+gulpfile.js
+gulpfile.md
+package.json
