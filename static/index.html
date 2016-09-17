@@ -9,29 +9,35 @@
 </head>
 <body onload="init()">
   <div class="container">
+    <div class="row">
+      <h2 class="text-center">Langton ant in ES6</h2>
+    </div>
     <div class="col-xs-9">
       <div id="content" class="col-xs-12"></div>
     </div>
     <div class="col-xs-3">
       <form onsubmit="event.preventDefault(); startGame();" >
-        <div class="form-group row">
-          <div class="col-xs-9">
-            <label for="speed" class="col-xs-3 col-form-label"> Speed m/s </label>
-            <input id="speed" type="range" min="10" max="2000" value="500" step="5" oninput="showValue(this.value, 'rangeSpeed')" onchange="showValue(this.value, 'rangeSpeed')" />
-            <span id="rangeSpeed">500</span>
+        <fieldset class="form-group">
+        <legend>Options of simulation</legend>
+          <div class="form-group row">
+            <div class="col-xs-9">
+              <label for="speed" class="col-xs-3 col-form-label"> Speed m/s </label>
+              <input id="speed" type="range" min="10" max="2000" value="500" step="5" oninput="showValue(this.value, 'rangeSpeed')" onchange="showValue(this.value, 'rangeSpeed')" />
+              <span id="rangeSpeed">500</span>
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-xs-9">
-            <label for="grid"  class="col-xs-3 col-form-label"> Size grid </label>
-            <input id="grid" type="range" min="10" max="51" value="51" step="1" oninput="showValue(this.value, 'gridSize')" onchange="showValue(this.value, 'gridSize')" />
-            <span id="gridSize">51</span>
+          <div class="form-group row">
+            <div class="col-xs-9">
+              <label for="grid"  class="col-xs-3 col-form-label"> Size grid </label>
+              <input id="grid" type="range" min="10" max="51" value="51" step="1" oninput="showValue(this.value, 'gridSize')" onchange="showValue(this.value, 'gridSize')" />
+              <span id="gridSize">51</span>
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <button id="submit" type="submit" class="btn btn-primary">Launch</button>
-          <button id="play-pause" class="btn btn-primary" onclick="playPause()" >Play / Pause</button>
-        <div>
+          <div class="form-group row">
+            <button id="submit" type="submit" class="btn btn-primary">Launch</button>
+            <button id="play-pause" class="btn btn-primary" onclick="playPause()" >Play / Pause</button>
+          <div>
+        </fieldset>
        </form>
     </div>
   </div>
