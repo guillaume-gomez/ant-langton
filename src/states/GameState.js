@@ -3,6 +3,7 @@ import Ant from 'objects/Ant';
 import History from 'objects/History';
 
 import { CellWidth, ElapsedTime, SizeTerrain, WidthCanvas, HeighCanvas } from '../constants';
+import { endSimulation } from '../utils';
 
 const CameraVelocity = 10;
 
@@ -60,6 +61,10 @@ class GameState extends Phaser.State {
 
   updatePosition() {
     let cell = this.gridLayout.getCellAtPosition( this.ant.x, this.ant.y );
+    if(cell === -1) {
+      endSimulation();
+      return;
+    }
     this.ant.updateAnt(cell);
     cell.toggle();
     this.steps += 1;

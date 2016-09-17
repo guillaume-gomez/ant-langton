@@ -22,3 +22,7 @@ export function getSize() {
   }
   return [width, height];
 }
+
+export function endSimulation() {
+  alert("End of the simulation : ant went out of grid");
+}
