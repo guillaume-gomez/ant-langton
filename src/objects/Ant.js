@@ -37,7 +37,6 @@ class Ant extends Phaser.Sprite{
     this.animations.stop("right");
     this.x = xPos;
     this.y = yPos;
-    
   }
 
   updateAnt(cell) {
