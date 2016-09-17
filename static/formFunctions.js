@@ -14,6 +14,7 @@ function showValue(newValue, id)
       window.gridSize = newValue;
     break;
     case 'historyValue':
+      window.historyStep = newValue;
     break;
   }
 }
