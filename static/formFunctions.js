@@ -10,7 +10,7 @@ function showValue(newValue, id)
     case 'rangeSpeed':
       window.ElapsedTime = newValue;
     break;
-    case 'gridSize':
+    case 'gridSizes':
       window.gridSize = newValue;
     break;
     case 'historyValue':
@@ -19,6 +19,10 @@ function showValue(newValue, id)
 }
 
 function startGame() {
+  if (window.gridSize === undefined) {
+    window.gridSize = document.getElementById('gridSizes').innerHTML;
+  }
+
   if(!window.gameInstance) {
     window.gameInstance = new window.game();
     document.getElementById('play-pause').style.visibility = 'visible';
