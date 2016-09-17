@@ -6,11 +6,15 @@ function init() {
 function showValue(newValue, id)
 {
   document.getElementById(id).innerHTML=newValue;
-  if(id === 'rangeSpeed') {
-    window.ElapsedTime = newValue;
-  }
-  else if(id === 'gridSize') {
-    window.gridSize = newValue
+  switch(id) {
+    case 'rangeSpeed':
+      window.ElapsedTime = newValue;
+    break;
+    case 'gridSize':
+      window.gridSize = newValue;
+    break;
+    case 'historyValue':
+    break;
   }
 }
 
