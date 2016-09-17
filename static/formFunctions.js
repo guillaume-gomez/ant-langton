@@ -19,6 +19,7 @@ function startGame() {
     window.gameInstance = new window.game();
     document.getElementById('play-pause').style.visibility = 'visible';
     document.getElementById('submit').style.visibility = 'hidden';
+    document.getElementById('grid').disabled = true;
   }
 }
 
