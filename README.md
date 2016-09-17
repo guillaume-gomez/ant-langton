@@ -1,4 +1,4 @@
-# langton ant's
+# langton's ant
 
 [Online version](https://guillaume-gomez.github.io/langton-ant-s-phaser/build)
 ![Game](static/res/preview.png "ScreenShot")
