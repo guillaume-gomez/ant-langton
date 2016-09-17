@@ -15,7 +15,15 @@ function showValue(newValue, id)
     break;
     case 'historyValue':
       window.historyStep = newValue;
+      goToStep();
     break;
+  }
+}
+
+function goToStep() {
+  console.log("fjkdj")
+  if(window.gameInstance) {
+    window.gameInstance.state.states.GameState.setSimulationTo(window.historyStep);
   }
 }
 

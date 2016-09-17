@@ -661,12 +661,13 @@ var GameState = function (_Phaser$State) {
         this.game.camera.x += CameraVelocity;
       }
     }
-  }, {
-    key: 'render',
-    value: function render() {
-      //this.game.debug.spriteBounds(this.ant);
-      this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");
-    }
+
+    // render() {
+    //   //this.game.debug.spriteBounds(this.ant);
+    //   this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");
+    // }
+
+
   }]);
 
   return GameState;

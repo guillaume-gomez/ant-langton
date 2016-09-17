@@ -104,10 +104,10 @@ class GameState extends Phaser.State {
       }
   }
 
-  render() {
-    //this.game.debug.spriteBounds(this.ant);
-    this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");
-  }
+  // render() {
+  //   //this.game.debug.spriteBounds(this.ant);
+  //   this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");
+  // }
 
 
 }
