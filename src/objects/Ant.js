@@ -10,7 +10,8 @@ class Ant extends Phaser.Sprite{
     };
 
     super(game, x, y, "ant", convertToColorFn(0));
-    this.antRotation = 90;
+    this.antRotation = 180;
+    this.frame = convertToColorFn(12);
 
     const downArray = [0, 1, 2].map(convertToColorFn);
     const leftArray = [12, 13, 14].map(convertToColorFn);
