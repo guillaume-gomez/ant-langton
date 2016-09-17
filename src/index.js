@@ -1,10 +1,12 @@
 import GameState from 'states/GameState';
-import { WidthCanvas, HeighCanvas}  from './constants';
+import { getSize }  from './utils';
 
 class Game extends Phaser.Game {
 
 	constructor() {
-		super(WidthCanvas, HeighCanvas, Phaser.AUTO, 'content', null);
+    const width = getSize()[0];
+    const height = getSize()[1];
+		super(width, height, Phaser.AUTO, 'content', null);
 		this.state.add('GameState', GameState, false);
 		this.state.start('GameState');
 	}
