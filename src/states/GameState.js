@@ -6,12 +6,14 @@ import { CellWidth, ElapsedTime, SizeTerrain, WidthCanvas, HeighCanvas } from '.
 import { endSimulation } from '../utils';
 
 const CameraVelocity = 10;
+const TimeoutRecord = 500;
 
 class GameState extends Phaser.State {
 
   create() {
     const sizeT = window.gridSize || SizeTerrain;
     const Bounds = CellWidth * sizeT;
+    console.log(Bounds)
     this.game.world.setBounds(0, 0, Bounds, Bounds);
     this.gridLayout = new Grid(this.game, Bounds/ CellWidth, Bounds/CellWidth, CellWidth);
     this.cursors = this.game.input.keyboard.createCursorKeys();
@@ -71,7 +73,8 @@ class GameState extends Phaser.State {
     cell.toggle();
     this.steps += 1;
     this.textStep.text = "Steps: " + this.steps;
-    this.replay.recordStep(this.steps, this.ant, this.gridLayout.getCellsArray());
+    const asyncRecord = () => this.replay.recordStep(this.steps, this.ant, this.gridLayout.getCellsArray());
+    setTimeout(asyncRecord , TimeoutRecord);
     if(window.play === true) {
       this.timer.add(window.ElapsedTime || ElapsedTime, this.updatePosition, this);
     }
