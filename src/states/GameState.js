@@ -73,8 +73,8 @@ class GameState extends Phaser.State {
     cell.toggle();
     this.steps += 1;
     this.textStep.text = "Steps: " + this.steps;
-    const asyncRecord = () => this.replay.recordStep(this.steps, this.ant, this.gridLayout.getCellsArray());
-    setTimeout(asyncRecord , TimeoutRecord);
+    this.replay.recordStep(this.steps, this.ant, this.gridLayout.getCellsArray());
+    //setTimeout(asyncRecord , TimeoutRecord);
     if(window.play === true) {
       this.timer.add(window.ElapsedTime || ElapsedTime, this.updatePosition, this);
     }
