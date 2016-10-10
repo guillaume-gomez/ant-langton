@@ -15,7 +15,6 @@ function showValue(newValue, id)
     break;
     case 'historyValue':
       window.historyStep = newValue;
-      goToStep();
     break;
   }
 }
@@ -49,3 +48,7 @@ function playPause() {
     window.gameInstance.state.states.GameState.updatePosition();
   }
 }
+
+document.getElementById("history").addEventListener('mouseup', function() {
+  goToStep();
+});
