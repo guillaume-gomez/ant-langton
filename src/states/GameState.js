@@ -82,7 +82,7 @@ class GameState extends Phaser.State {
 
   setSimulationTo(step) {
     this.timer.removeAll();
-    const stepInt = parseInt(step)
+    const stepInt = parseInt(step || 1);
     const simulationData = this.replay.getTo(stepInt);
     this.gridLayout.setStates(simulationData.grid);
     this.ant.goTo(simulationData.x, simulationData.y);
