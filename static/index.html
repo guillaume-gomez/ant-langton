@@ -29,7 +29,7 @@
           <div class="form-group row">
             <div class="col-xs-9">
               <label for="history"  class="col-xs-3 col-form-label"> History </label>
-              <input id="history" type="range" min="1" max="20" value="1" step="1" oninput="showValue(this.value, 'historyValue')" onchange="showValue(this.value, 'historyValue')" />
+              <input id="history" type="range" min="1" max="1" value="1" step="1" oninput="showValue(this.value, 'historyValue')" onchange="showValue(this.value, 'historyValue')" />
               <span id="historyValue">1</span>
             </div>
           </div>
@@ -49,6 +49,12 @@
        <div class="well well-sm">Use directionnal pad to move camera</div>
     </div>
   </div>
+  <!-- jquery-->
+  <script
+    src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+    integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
+    crossorigin="anonymous">
+  </script>
   <script src="scripts/phaser.min.js"></script>
   <script src="scripts/game.js"></script>
   <script src="formFunctions.js"></script>

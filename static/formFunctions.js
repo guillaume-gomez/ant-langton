@@ -1,6 +1,10 @@
 function init() {
   document.getElementById('play-pause').style.visibility = 'hidden';
   window.play = true;
+
+  window.updateHistorySlider = function updateHistorySlider(maxSize) {
+    $('#history').prop('max', maxSize);
+  }
 }
 
 function showValue(newValue, id)
@@ -48,6 +52,7 @@ function playPause() {
     window.gameInstance.state.states.GameState.updatePosition();
   }
 }
+
 
 document.getElementById("history").addEventListener('mouseup', function() {
   goToStep();

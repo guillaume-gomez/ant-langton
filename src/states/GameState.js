@@ -77,6 +77,7 @@ class GameState extends Phaser.State {
     //setTimeout(asyncRecord , TimeoutRecord);
     if(window.play === true) {
       this.timer.add(window.ElapsedTime || ElapsedTime, this.updatePosition, this);
+      window.updateHistorySlider(this.steps);
     }
   }
 
