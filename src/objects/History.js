@@ -20,9 +20,9 @@ class History {
   }
 
   recordStep(step, ant, gridArray) {
-    const { x, y } = ant;
+    const { x, y, antRotation } = ant;
     if(this.isRecording) {
-      this.record[step] = { x, y, grid: gridArray };
+      this.record[step] = { x, y, antRotation, grid: gridArray };
     }
   }
 
