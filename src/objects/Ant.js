@@ -23,7 +23,10 @@ class Ant extends Phaser.Sprite{
     this.animations.add('right', rightArray, 10, true);
     this.animations.add('up', upArray , 10, true);
 
-    this.lock = false;
+    this.currentTweenLeft = null;
+    this.currentTweenRight = null;
+    this.currentTweenUp = null;
+    this.currentTweenDown = null;
 
     this.game = game;
 	}
@@ -34,47 +37,41 @@ class Ant extends Phaser.Sprite{
   }
 
   goTo(xPos, yPos, antRotation) {
-    this.animations.stop("down");
-    this.animations.stop("up");
-    this.animations.stop("left");
-    this.animations.stop("right");
+    this.animations.stop(null, true)
     this.x = xPos;
     this.y = yPos;
     this.antRotation = antRotation;
-    this.lock = true;
-
+    this.currentTweenLeft.stop();
+    this.currentTweenRight.stop();
+    this.currentTweenUp.stop();
+    this.currentTweenDown.stop();
   }
 
   updateAnt(cell) {
-    if(!this.lock) {
-      if(cell.isChecked()) {
-        this.rotate(1);
-      } else {
-        this.rotate(-1);
-      }
-      switch(this.antRotation) {
-        case 0:
-          this.turnRight();
-        break;
-        case 90:
-          this.goUp();
-        break;
-        case 180:
-          this.turnLeft();
-        break;
-        case 270:
-          this.goDown();
-        break;
-      }
+    if(cell.isChecked()) {
+      this.rotate(1);
     } else {
-      this.lock = false;
+      this.rotate(-1);
+    }
+    switch(this.antRotation) {
+      case 0:
+        this.turnRight();
+      break;
+      case 90:
+        this.goUp();
+      break;
+      case 180:
+        this.turnLeft();
+      break;
+      case 270:
+        this.goDown();
+      break;
     }
   }
 
   goDown() {
     const position = this.y + CellWidth;
-    //this.game.add.tween(this).to( { y: position }, window.ElapsedTime || ElapsedTime, Phaser.Easing.Linear.None, true);
-    this.y = position;
+    this.currentTweenDown = this.game.add.tween(this).to( { y: position }, window.ElapsedTime || ElapsedTime, Phaser.Easing.Linear.None, true);
     this.animations.play("down", 45, true);
     this.animations.stop("up");
     this.animations.stop("left");
@@ -83,8 +80,7 @@ class Ant extends Phaser.Sprite{
 
   goUp() {
     const position = this.y - CellWidth;
-    this.y = position;
-    //this.game.add.tween(this).to( { y: position }, window.ElapsedTime || ElapsedTime, Phaser.Easing.Linear.None, true);
+    this.currentTweenUp = this.game.add.tween(this).to( { y: position }, window.ElapsedTime || ElapsedTime, Phaser.Easing.Linear.None, true);
     this.animations.play("up", 45, true);
     this.animations.stop("down");
     this.animations.stop("left");
@@ -93,8 +89,7 @@ class Ant extends Phaser.Sprite{
 
   turnLeft() {
     const position = this.x - CellWidth;
-    this.x = position;
-    //this.game.add.tween(this).to( { x: position }, window.ElapsedTime || ElapsedTime, Phaser.Easing.Linear.None, true);
+    this.currentTweenLeft = this.game.add.tween(this).to( { x: position }, window.ElapsedTime || ElapsedTime, Phaser.Easing.Linear.None, true);
     this.animations.play("left", 45, true);
     this.animations.stop("down");
     this.animations.stop("up");
@@ -103,8 +98,7 @@ class Ant extends Phaser.Sprite{
 
   turnRight() {
     const position = this.x + CellWidth;
-    this.x = position;
-    //this.game.add.tween(this).to( { x: position }, window.ElapsedTime || ElapsedTime, Phaser.Easing.Linear.None, true);
+    this.currentTweenRight = this.game.add.tween(this).to( { x: position }, window.ElapsedTime || ElapsedTime, Phaser.Easing.Linear.None, true);
     this.animations.play("right", 45, true);
     this.animations.stop("down");
     this.animations.stop("left");
