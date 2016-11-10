@@ -22,15 +22,22 @@
           <div class="form-group row">
             <div class="col-xs-9">
               <label for="speed" class="col-xs-3 col-form-label"> Speed m/s </label>
-              <input id="speed" type="range" min="100" max="2000" value="500" step="5" oninput="showValue(this.value, 'rangeSpeed')" onchange="showValue(this.value, 'rangeSpeed')" />
+              <input id="speed" type="range" min="150" max="2000" value="500" step="5" oninput="showValue(this.value, 'rangeSpeed')" onchange="showValue(this.value, 'rangeSpeed')" />
               <span id="rangeSpeed">500</span>
             </div>
           </div>
           <div class="form-group row">
             <div class="col-xs-9">
+              <label for="history"  class="col-xs-3 col-form-label"> History </label>
+              <input id="history" type="range" min="1" max="1" value="1" step="1" oninput="showValue(this.value, 'historyValue')" onchange="showValue(this.value, 'historyValue')" />
+              <span id="historyValue">1</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-xs-9">
               <label for="grid"  class="col-xs-3 col-form-label"> Size grid </label>
-              <input id="grid" type="range" min="10" max="51" value="51" step="1" oninput="showValue(this.value, 'gridSizes')" onchange="showValue(this.value, 'gridSizes')" />
-              <span id="gridSizes">51</span>
+              <input id="grid" type="range" min="10" max="100" value="50" step="1" oninput="showValue(this.value, 'gridSizes')" onchange="showValue(this.value, 'gridSizes')" />
+              <span id="gridSizes">50</span>
             </div>
           </div>
           <div class="form-group row">
@@ -42,6 +49,12 @@
        <div class="well well-sm">Use directionnal pad to move camera</div>
     </div>
   </div>
+  <!-- jquery-->
+  <script
+    src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+    integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
+    crossorigin="anonymous">
+  </script>
   <script src="scripts/phaser.min.js"></script>
   <script src="scripts/game.js"></script>
   <script src="formFunctions.js"></script>

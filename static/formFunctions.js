@@ -1,6 +1,10 @@
 function init() {
   document.getElementById('play-pause').style.visibility = 'hidden';
   window.play = true;
+
+  window.updateHistorySlider = function updateHistorySlider(maxSize) {
+    $('#history').prop('max', maxSize);
+  }
 }
 
 function showValue(newValue, id)
@@ -21,7 +25,6 @@ function showValue(newValue, id)
 }
 
 function goToStep() {
-  console.log("fjkdj")
   if(window.gameInstance) {
     window.gameInstance.state.states.GameState.setSimulationTo(window.historyStep);
   }
@@ -50,3 +53,8 @@ function playPause() {
     window.gameInstance.state.states.GameState.updatePosition();
   }
 }
+
+
+document.getElementById("history").addEventListener('mouseup', function() {
+  goToStep();
+});

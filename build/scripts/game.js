@@ -129,7 +129,8 @@ var Ant = function (_Phaser$Sprite) {
 
     var _this = _possibleConstructorReturn(this, (Ant.__proto__ || Object.getPrototypeOf(Ant)).call(this, game, x, y, "ant", convertToColorFn(0)));
 
-    _this.antRotation = 90;
+    _this.antRotation = 180;
+    _this.frame = convertToColorFn(12);
 
     var downArray = [0, 1, 2].map(convertToColorFn);
     var leftArray = [12, 13, 14].map(convertToColorFn);
@@ -140,6 +141,11 @@ var Ant = function (_Phaser$Sprite) {
     _this.animations.add('left', leftArray, 10, true);
     _this.animations.add('right', rightArray, 10, true);
     _this.animations.add('up', upArray, 10, true);
+
+    _this.currentTweenLeft = null;
+    _this.currentTweenRight = null;
+    _this.currentTweenUp = null;
+    _this.currentTweenDown = null;
 
     _this.game = game;
     return _this;
@@ -153,13 +159,15 @@ var Ant = function (_Phaser$Sprite) {
     }
   }, {
     key: "goTo",
-    value: function goTo(xPos, yPos) {
-      this.animations.stop("down");
-      this.animations.stop("up");
-      this.animations.stop("left");
-      this.animations.stop("right");
+    value: function goTo(xPos, yPos, antRotation) {
+      this.animations.stop(null, true);
       this.x = xPos;
       this.y = yPos;
+      this.antRotation = antRotation;
+      this.currentTweenLeft.stop();
+      this.currentTweenRight.stop();
+      this.currentTweenUp.stop();
+      this.currentTweenDown.stop();
     }
   }, {
     key: "updateAnt",
@@ -188,7 +196,7 @@ var Ant = function (_Phaser$Sprite) {
     key: "goDown",
     value: function goDown() {
       var position = this.y + _constants.CellWidth;
-      this.game.add.tween(this).to({ y: position }, window.ElapsedTime || _constants.ElapsedTime, Phaser.Easing.Linear.None, true);
+      this.currentTweenDown = this.game.add.tween(this).to({ y: position }, window.ElapsedTime || _constants.ElapsedTime, Phaser.Easing.Linear.None, true);
       this.animations.play("down", 45, true);
       this.animations.stop("up");
       this.animations.stop("left");
@@ -198,7 +206,7 @@ var Ant = function (_Phaser$Sprite) {
     key: "goUp",
     value: function goUp() {
       var position = this.y - _constants.CellWidth;
-      this.game.add.tween(this).to({ y: position }, window.ElapsedTime || _constants.ElapsedTime, Phaser.Easing.Linear.None, true);
+      this.currentTweenUp = this.game.add.tween(this).to({ y: position }, window.ElapsedTime || _constants.ElapsedTime, Phaser.Easing.Linear.None, true);
       this.animations.play("up", 45, true);
       this.animations.stop("down");
       this.animations.stop("left");
@@ -208,7 +216,7 @@ var Ant = function (_Phaser$Sprite) {
     key: "turnLeft",
     value: function turnLeft() {
       var position = this.x - _constants.CellWidth;
-      this.game.add.tween(this).to({ x: position }, window.ElapsedTime || _constants.ElapsedTime, Phaser.Easing.Linear.None, true);
+      this.currentTweenLeft = this.game.add.tween(this).to({ x: position }, window.ElapsedTime || _constants.ElapsedTime, Phaser.Easing.Linear.None, true);
       this.animations.play("left", 45, true);
       this.animations.stop("down");
       this.animations.stop("up");
@@ -218,7 +226,7 @@ var Ant = function (_Phaser$Sprite) {
     key: "turnRight",
     value: function turnRight() {
       var position = this.x + _constants.CellWidth;
-      this.game.add.tween(this).to({ x: position }, window.ElapsedTime || _constants.ElapsedTime, Phaser.Easing.Linear.None, true);
+      this.currentTweenRight = this.game.add.tween(this).to({ x: position }, window.ElapsedTime || _constants.ElapsedTime, Phaser.Easing.Linear.None, true);
       this.animations.play("right", 45, true);
       this.animations.stop("down");
       this.animations.stop("left");
@@ -320,17 +328,17 @@ exports.default = Cell;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () {
-	function defineProperties(target, props) {
-		for (var i = 0; i < props.length; i++) {
-			var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-		}
-	}return function (Constructor, protoProps, staticProps) {
-		if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-	};
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
 }();
 
 var _Cell = require("objects/Cell");
@@ -340,87 +348,89 @@ var _Cell2 = _interopRequireDefault(_Cell);
 var _constants = require("../constants");
 
 function _interopRequireDefault(obj) {
-	return obj && obj.__esModule ? obj : { default: obj };
+  return obj && obj.__esModule ? obj : { default: obj };
 }
 
 function _classCallCheck(instance, Constructor) {
-	if (!(instance instanceof Constructor)) {
-		throw new TypeError("Cannot call a class as a function");
-	}
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
 }
 
 function _possibleConstructorReturn(self, call) {
-	if (!self) {
-		throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-	}return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && (typeof call === "object" || typeof call === "function") ? call : self;
 }
 
 function _inherits(subClass, superClass) {
-	if (typeof superClass !== "function" && superClass !== null) {
-		throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-	}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
 
 var Grid = function (_Phaser$Group) {
-	_inherits(Grid, _Phaser$Group);
+  _inherits(Grid, _Phaser$Group);
 
-	function Grid(game, nbRow, nbColumn, cellSize) {
-		var xOrigin = arguments.length <= 4 || arguments[4] === undefined ? 0 : arguments[4];
-		var yOrigin = arguments.length <= 5 || arguments[5] === undefined ? 0 : arguments[5];
-		var cellColor = arguments.length <= 6 || arguments[6] === undefined ? 0xFFFFFFF : arguments[6];
-		var gridColor = arguments.length <= 7 || arguments[7] === undefined ? 0x000000 : arguments[7];
+  function Grid(game, nbRow, nbColumn, cellSize) {
+    var xOrigin = arguments.length <= 4 || arguments[4] === undefined ? 0 : arguments[4];
+    var yOrigin = arguments.length <= 5 || arguments[5] === undefined ? 0 : arguments[5];
+    var cellColor = arguments.length <= 6 || arguments[6] === undefined ? 0xFFFFFFF : arguments[6];
+    var gridColor = arguments.length <= 7 || arguments[7] === undefined ? 0x000000 : arguments[7];
 
-		_classCallCheck(this, Grid);
+    _classCallCheck(this, Grid);
 
-		var _this = _possibleConstructorReturn(this, (Grid.__proto__ || Object.getPrototypeOf(Grid)).call(this, game));
+    var _this = _possibleConstructorReturn(this, (Grid.__proto__ || Object.getPrototypeOf(Grid)).call(this, game));
 
-		_this.nbRow = nbRow;
-		_this.nbColumn = nbColumn;
-		for (var y = 0; y < nbColumn; ++y) {
-			for (var x = 0; x < nbRow; ++x) {
-				_this.add(new _Cell2.default(game, x * cellSize + xOrigin, y * cellSize + yOrigin, cellSize, cellSize, cellColor, gridColor));
-			}
-		}
-		return _this;
-	}
+    _this.nbRow = nbRow;
+    _this.nbColumn = nbColumn;
+    for (var y = 0; y < nbColumn; ++y) {
+      for (var x = 0; x < nbRow; ++x) {
+        _this.add(new _Cell2.default(game, x * cellSize + xOrigin, y * cellSize + yOrigin, cellSize, cellSize, cellColor, gridColor));
+      }
+    }
+    return _this;
+  }
 
-	_createClass(Grid, [{
-		key: "getCell",
-		value: function getCell(rowIndex, columnIndex) {
-			if (rowIndex > this.nbRow || columnIndex > this.nbColumn) {
-				console.error("Grid::getCell out of border");
-				return null;
-			}
-			var index = rowIndex + columnIndex * this.nbColumn;
-			return this.getAt(index);
-		}
-	}, {
-		key: "getCellAtPosition",
-		value: function getCellAtPosition(x, y) {
-			var indexX = Math.trunc(x / _constants.CellWidth);
-			var indexY = Math.trunc(y / _constants.CellWidth);
-			return this.getCell(indexX, indexY);
-		}
-	}, {
-		key: "setStates",
-		value: function setStates(arrayState) {
-			var _this2 = this;
+  _createClass(Grid, [{
+    key: "getCell",
+    value: function getCell(rowIndex, columnIndex) {
+      if (rowIndex > this.nbRow || columnIndex > this.nbColumn) {
+        console.error("Grid::getCell out of border");
+        return null;
+      }
+      var index = rowIndex + columnIndex * this.nbColumn;
+      return this.getAt(index);
+    }
+  }, {
+    key: "getCellAtPosition",
+    value: function getCellAtPosition(x, y) {
+      var indexX = Math.trunc(x / _constants.CellWidth);
+      var indexY = Math.trunc(y / _constants.CellWidth);
+      return this.getCell(indexX, indexY);
+    }
+  }, {
+    key: "setStates",
+    value: function setStates(arrayState) {
+      var _this2 = this;
 
-			arrayState.forEach(function (value, index) {
-				_this2.children[index].checked = value;
-				_this2.children[index].draw();
-			});
-		}
-	}, {
-		key: "getCellsArray",
-		value: function getCellsArray() {
-			return this.children.map(function (cell) {
-				return cell.checked;
-			});
-		}
-	}]);
+      arrayState.forEach(function (value, index) {
+        if (_this2.children[index].checked != value) {
+          _this2.children[index].checked = value;
+          _this2.children[index].draw();
+        }
+      });
+    }
+  }, {
+    key: "getCellsArray",
+    value: function getCellsArray() {
+      return this.children.map(function (cell) {
+        return cell.checked;
+      });
+    }
+  }]);
 
-	return Grid;
+  return Grid;
 }(Phaser.Group);
 
 exports.default = Grid;
@@ -478,9 +488,10 @@ var History = function () {
     value: function recordStep(step, ant, gridArray) {
       var x = ant.x;
       var y = ant.y;
+      var antRotation = ant.antRotation;
 
       if (this.isRecording) {
-        this.record[step] = { x: x, y: y, grid: gridArray };
+        this.record[step] = { x: x, y: y, antRotation: antRotation, grid: gridArray };
       }
     }
   }, {
@@ -554,6 +565,7 @@ function _inherits(subClass, superClass) {
 }
 
 var CameraVelocity = 10;
+var TimeoutRecord = 500;
 
 var GameState = function (_Phaser$State) {
   _inherits(GameState, _Phaser$State);
@@ -569,6 +581,7 @@ var GameState = function (_Phaser$State) {
     value: function create() {
       var sizeT = window.gridSize || _constants.SizeTerrain;
       var Bounds = _constants.CellWidth * sizeT;
+      console.log(Bounds);
       this.game.world.setBounds(0, 0, Bounds, Bounds);
       this.gridLayout = new _Grid2.default(this.game, Bounds / _constants.CellWidth, Bounds / _constants.CellWidth, _constants.CellWidth);
       this.cursors = this.game.input.keyboard.createCursorKeys();
@@ -634,17 +647,22 @@ var GameState = function (_Phaser$State) {
       this.steps += 1;
       this.textStep.text = "Steps: " + this.steps;
       this.replay.recordStep(this.steps, this.ant, this.gridLayout.getCellsArray());
+      //setTimeout(asyncRecord , TimeoutRecord);
       if (window.play === true) {
         this.timer.add(window.ElapsedTime || _constants.ElapsedTime, this.updatePosition, this);
+        window.updateHistorySlider(this.steps);
       }
     }
   }, {
     key: 'setSimulationTo',
     value: function setSimulationTo(step) {
-      var simulationData = this.replay.getTo(step);
+      this.timer.removeAll();
+      var stepInt = parseInt(step || 1);
+      var simulationData = this.replay.getTo(stepInt - 1);
       this.gridLayout.setStates(simulationData.grid);
-      this.ant.goTo(simulationData.x, simulationData.y);
-      this.steps = step;
+      this.ant.goTo(simulationData.x, simulationData.y, simulationData.antRotation);
+      this.steps = stepInt;
+      this.timer.add(window.ElapsedTime || _constants.ElapsedTime, this.updatePosition, this);
     }
   }, {
     key: 'update',
